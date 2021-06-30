@@ -24,11 +24,13 @@ const initState = {
 export default (state = initState, action) => {
     switch (action.type) {
         case SET_SEARCH:
-            return { ...state, search: search };
+            return { ...state, payload: search };
         case INCREMENT_PAGE:
             return { ...state, page: state.page + 1 };
         case DECREMENT_PAGE:
-            return { ...state, page: state.page - 1 };
+            return {
+                ...state, page: state.page - 1 
+            };
         default:
             return state
     }

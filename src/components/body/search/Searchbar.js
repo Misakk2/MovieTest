@@ -17,7 +17,9 @@ export const Searchbar = () => {
     }
 
     const handleDecrement = () => {
-        dispatch(decrement())
+        if (page > 1) {
+            dispatch(decrement())
+        }
     }
 
     const handleChange = e => {
