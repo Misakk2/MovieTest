@@ -8,8 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment, setSearch } from '../../../redux/reducers/searchReducer';
 
 export const Searchbar = () => {
-    const [searchState, setSearchState] = useState();
-    const search = useSelector(state => state.search.search)
+    const [searchState, setSearchState] = useState('');
     const page = useSelector(state => state.search.page)
     const dispatch = useDispatch();
 

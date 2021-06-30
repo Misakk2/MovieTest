@@ -16,7 +16,7 @@ export const decrement = () => ({
 });
 
 const initState = {
-    search: "",
+    search: {},
     page: 1
 }
 

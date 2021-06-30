@@ -17,8 +17,8 @@ const initState = {
 export default (state = initState, action) => {
     switch (action.type) {
         case SET_MOVIES:
-            const { movies } = action;
-            retrun;
+            const { movies } = action
+            return { movies };
         default:
             return state;
     }
