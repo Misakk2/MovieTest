@@ -64,7 +64,6 @@ export const Searchbar = () => {
                     <Button onClick={handleIncrement} color="primary">Next</Button>
                 </div>
             </FormControl>
-            <p>{page}</p>
         </div>
     )
 }

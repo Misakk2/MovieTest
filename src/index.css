@@ -32,10 +32,10 @@ code {
 .container {
   width: 100%;
   display: flex;
+  flex-direction: column;
 }
 
 .searchBar {
-  width: 100%;
   padding: 2rem;
 }
 .searchBarForm {
@@ -48,6 +48,39 @@ code {
   justify-content: center;
   width: 100%;
   margin-top: 1rem;
+}
+
+.MovieList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+a {
+  text-decoration: none;
+}
+
+.MovieListItem {
+  flex-basis: 20%;
+  margin-bottom: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 10rem;
+  text-align: center;
+  justify-content: center;
+  background-color: aliceblue;
+  text-decoration: none;
+  color: slategray;
+}
+
+.MuiButton-root.buttonAdd {
+  width: 100% !important;
+  border-radius: 0px;
 }
 
 .MuiBottomNavigation-root {
