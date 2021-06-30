@@ -1,24 +1,28 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import logo from './logo.svg';
-import './App.css';
+import { Nav } from './components/nav/Nav';
+import { Body } from './components/body/Body';
+import { Detail } from './components/detail/Detail';
+import { Favorite } from './components/favorite/Favorite';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Nav />
       </header>
-    </div>
+
+      <div className="container">
+        <Switch>
+          <Route exact path="/" component={Body} />
+          <Route path="/detail/:imdbID" component={Detail} />
+          <Route path="/favorite" component={Favorite} />
+          <Route>404 Not Found!</Route>
+        </Switch>
+      </div>
+    </Router >
   );
 }
 
