@@ -10,10 +10,13 @@ import { decrement, increment, setSearch } from '../../../redux/reducers/searchR
 export const Searchbar = () => {
     const [searchState, setSearchState] = useState('');
     const page = useSelector(state => state.search.page)
+    const searchDisplay = useSelector(state => state.search.search)
     const dispatch = useDispatch();
 
     const handleIncrement = () => {
-        dispatch(increment())
+        if (searchState !== "") {
+            dispatch(increment())
+        }
     }
 
     const handleDecrement = () => {
@@ -26,15 +29,13 @@ export const Searchbar = () => {
         setSearchState(e.target.value);
     }
 
-    useEffect(() => {
+    const handleSubmit = e => {
+        e.preventDefault();
         if (searchState !== "") {
             dispatch(setSearch(searchState))
         }
-    }, [searchState])
-
-    const handleSubmit = e => {
-        e.preventDefault();
     }
+
 
     return (
         <div className="searchBar">
@@ -64,7 +65,6 @@ export const Searchbar = () => {
                 </div>
             </FormControl>
             <p>{page}</p>
-
         </div>
     )
 }
