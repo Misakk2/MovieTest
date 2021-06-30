@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import { Input, InputLabel, InputAdornment } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment, search } from '../../../redux/reducers/searchReducer';
+import { decrement, increment, setSearch } from '../../../redux/reducers/searchReducer';
 
 export const Searchbar = () => {
+    const [searchState, setSearchState] = useState();
     const search = useSelector(state => state.search.search)
     const page = useSelector(state => state.search.page)
     const dispatch = useDispatch();
@@ -23,15 +24,17 @@ export const Searchbar = () => {
     }
 
     const handleChange = e => {
-        dispatch(search({
-            paylaod: e.target.value
-        }))
-        console.log(search)
+        setSearchState(e.target.value);
     }
+
+    useEffect(() => {
+        if (searchState !== "") {
+            dispatch(setSearch(searchState))
+        }
+    }, [searchState])
+
     const handleSubmit = e => {
         e.preventDefault();
-
-        /*  setSubmit(search); */
     }
 
     return (
@@ -43,7 +46,7 @@ export const Searchbar = () => {
                         id="search-movie-adorment"
                         type='text'
                         fullWidth
-                        value={search}
+                        value={searchState}
                         onChange={handleChange}
                         endAdornment={
                             <InputAdornment position="end">
@@ -56,10 +59,13 @@ export const Searchbar = () => {
                         }
                     />
                 </form>
+                <div className="ButtonContainer">
+                    <Button onClick={handleDecrement} color="secondary">Back</Button>
+                    <Button onClick={handleIncrement} color="primary">Next</Button>
+                </div>
             </FormControl>
             <p>{page}</p>
-            <Button onClick={handleDecrement} color="secondary">Back</Button>
-            <Button onClick={handleIncrement} color="primary">Next</Button>
+
         </div>
     )
 }

@@ -42,6 +42,14 @@ code {
   width: 100%;
   justify-content: center;
 }
+
+.ButtonContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
 .MuiBottomNavigation-root {
   background-color: aliceblue !important;
   height: 100% !important;
