@@ -5,6 +5,8 @@ import moviesReducer from './reducers/moviesReducer';
 import detailReducer from "./reducers/detailReducer";
 import favoriteReducer from "./reducers/favoriteReducer";
 
+import rootSaga from '../sagas/rootSaga';
+
 const reducer = combineReducers({
     search: searchReducer,
     movie: moviesReducer,
@@ -12,11 +14,15 @@ const reducer = combineReducers({
     favorite: favoriteReducer
 });
 
+const saga = createSagaMiddleware()
+
 const store = createStore(
     reducer,
     {},
-
+    applyMiddleware(saga)
 );
+
+saga.run(rootSaga)
 
 export default store;
 /*

@@ -5,12 +5,13 @@ import { Nav } from './components/nav/Nav';
 import { Body } from './components/body/Body';
 import { Detail } from './components/detail/Detail';
 import { Favorite } from './components/favorite/Favorite';
+import { Link } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
         <Nav />
       </header>
 

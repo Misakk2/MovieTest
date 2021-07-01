@@ -36,7 +36,6 @@ export const Movies = () => {
     useEffect(() => {
         if (getSearch !== "") {
             fetchMovies();
-            console.log(getMovies)
         }
     }, [getSearch])
 

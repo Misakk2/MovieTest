@@ -8,7 +8,6 @@ import { removeFavorite } from '../../redux/reducers/favoriteReducer';
 export const Favorite = () => {
     const dispatch = useDispatch();
     const getFavorite = useSelector((state) => state.favorite.favorite);
-    console.log(removeFavorite)
 
 
     const renderListEmpty = getFavorite.length === 0 && <p key="NofavoriteMovies">You do not have favorite movies</p>
