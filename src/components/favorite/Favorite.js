@@ -5,14 +5,16 @@ import StarIcon from '@material-ui/icons/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFavorite } from '../../redux/reducers/favoriteReducer';
 
+
+
 export const Favorite = () => {
     const dispatch = useDispatch();
     const getFavorite = useSelector((state) => state.favorite.favorite);
 
 
-    const renderListEmpty = getFavorite.length === 0 && <p key="NofavoriteMovies">You do not have favorite movies</p>
+    const renderListEmpty = getFavorite?.length === 0 && <p key="NofavoriteMovies">You do not have favorite movies</p>
 
-    const renderList = getFavorite.length > 0 && getFavorite.map((favorit) => {
+    const renderList = getFavorite?.length > 0 && getFavorite.map((favorit) => {
         const { Title, Year, imdbID, Type, Poster } = favorit;
         return (
             <div key={imdbID} className="responseCard">

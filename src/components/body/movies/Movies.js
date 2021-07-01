@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
-import { BaseSearchUrl, ApiKey } from '../../../api/Api';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+
+import { BaseSearchUrl, ApiKey } from '../../../api/Api';
+import { setMovies } from '../../../redux/reducers/moviesReducer';
+import { setFavorite } from '../../../redux/reducers/favoriteReducer';
+
+import { useDispatch, useSelector, connect } from 'react-redux';
+
+
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
-import StarOutlineIcon from '@material-ui/icons/StarOutline';
-import { setMovies } from '../../../redux/reducers/moviesReducer';
-import { setFavorite } from '../../../redux/reducers/favoriteReducer';
+
 
 export const Movies = () => {
     const dispatch = useDispatch();
@@ -38,6 +43,8 @@ export const Movies = () => {
             fetchMovies();
         }
     }, [getSearch])
+
+
 
     const renderEmpty = getMovies.length == 0 && <p>Start with movie Search</p>;
 

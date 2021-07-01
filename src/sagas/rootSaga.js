@@ -1,5 +1,11 @@
+import { all } from 'redux-saga/effects'
+
+import { favoriteSaga } from './favoriteSaga'
+
 function* rootSaga() {
-    yield console.log('Inside Root Saga.')
+    yield all([
+        favoriteSaga(),
+    ])
 }
 
 export default rootSaga;
