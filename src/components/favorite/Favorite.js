@@ -1,29 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { IconButton } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFavorite } from '../../redux/reducers/favoriteReducer';
 
-
-
 export const Favorite = () => {
     const dispatch = useDispatch();
     const getFavorite = useSelector((state) => state.favorite.favorite);
-
-    /*     useEffect(() => {
-            const data = localStorage.getItem('favoriteMovies')
-            if (data) {
-    
-                dispatch(setFavorite(JSON.parse(data)))
-            }
-        }, []) */
-
-    /*     useEffect(() => {
-            if (getFavorite !== undefined && getFavorite !== null && getFavorite.Title !== "") {
-                localStorage.setItem('favoriteMovies', JSON.stringify(getFavorite))
-            }
-        }, []) */
 
     const renderListEmpty = getFavorite?.length === 0 && <p key="NofavoriteMovies">You do not have favorite movies</p>
 
