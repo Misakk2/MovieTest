@@ -20,6 +20,12 @@ export default (state = initState, action) => {
         case SET_FAVORITE:
             const { favorite } = action
             return { ...state, favorite: [...state.favorite, favorite] };
+        case REMOVE_FAVORITE:
+            return {
+                ...state, favorite: state.favorite.filter(favorit => {
+                    return favorit.imdbID !== action.favorite
+                })
+            };
         default:
             return state;
     }

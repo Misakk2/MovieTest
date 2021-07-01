@@ -40,6 +40,8 @@ export const Movies = () => {
         }
     }, [getSearch])
 
+    const renderEmpty = getMovies.length == 0 && <p>Start with movie Search</p>;
+
 
     const renderList = getMovies?.map((movie) => {
         const { imdbID: id, Title, Year, Type, Poster } = movie;
@@ -69,6 +71,7 @@ export const Movies = () => {
 
     return (
         <div className="MovieList">
+            {renderEmpty}
             {renderList}
         </div>
     )
