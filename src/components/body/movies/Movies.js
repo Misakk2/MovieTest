@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import { setMovies } from '../../../redux/reducers/moviesReducer';
+import { setFavorite } from '../../../redux/reducers/favoriteReducer';
 
 export const Movies = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,6 @@ export const Movies = () => {
     const getMovies = useSelector((state) => state.movie.movies);
 
     const fetchMovies = async () => {
-        console.log(getMovies)
         const response = await axios.get(`${BaseSearchUrl}?s=${getSearch}&page=${getPages}&apikey=${ApiKey}`)
             .catch((err) => {
                 console.log("Err", err)
@@ -61,7 +61,7 @@ export const Movies = () => {
                         </div>
                     </div>
                 </Link>
-                <Button color="primary" className="buttonAdd">
+                <Button onClick={(e) => dispatch(setFavorite(movie))} color="primary" className="buttonAdd">
                     <StarOutlineIcon /> add to Favorite
                 </Button>
             </div>)

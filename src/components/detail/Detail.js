@@ -34,7 +34,8 @@ export const Detail = () => {
     }
 
     useEffect(() => {
-        if (imdbID && imdbID !== "") {
+        {
+            imdbID && imdbID !== "" &&
             fetchMovieDetail()
 
         };

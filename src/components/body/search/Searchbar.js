@@ -14,14 +14,16 @@ export const Searchbar = () => {
     const dispatch = useDispatch();
 
     const handleIncrement = () => {
-        if (searchState !== "") {
-            dispatch(increment())
+        {
+            searchState !== "" &&
+                dispatch(increment())
         }
     }
 
     const handleDecrement = () => {
-        if (page > 1) {
-            dispatch(decrement())
+        {
+            page > 1 &&
+                dispatch(decrement())
         }
     }
 
@@ -31,8 +33,9 @@ export const Searchbar = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (searchState !== "") {
-            dispatch(setSearch(searchState))
+        {
+            searchState !== "" &&
+                dispatch(setSearch(searchState))
         }
     }
 
@@ -50,11 +53,11 @@ export const Searchbar = () => {
                         onChange={handleChange}
                         endAdornment={
                             <InputAdornment position="end">
-                                <IconButton type='submit'
+                                <Button type='submit'
                                     aria-label="Search for movie"
                                 >
                                     <SearchIcon />
-                                </IconButton>
+                                </Button>
                             </InputAdornment>
                         }
                     />
