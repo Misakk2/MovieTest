@@ -1,4 +1,4 @@
-import { all } from 'redux-saga/effects'
+/* import { all } from 'redux-saga/effects'
 
 import { favoriteSaga } from './favoriteSaga'
 
@@ -9,4 +9,4 @@ function* rootSaga() {
     ])
 }
 
-export default rootSaga;
+export default rootSaga; */
