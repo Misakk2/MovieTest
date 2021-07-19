@@ -32,8 +32,8 @@ const Movies = () => {
         }
     }, [getPages])
 
-
-    const renderEmpty = getMovies.length === 0 && <p>Start with movie Search</p>;
+    const badRequest = getMovies == undefined && <p>Bad request name try again.</p>;
+    const renderEmpty = getMovies?.length === 0 && <p>Start with movie Search</p>;
 
 
     const renderList = getMovies?.map((movie) => {
@@ -66,6 +66,7 @@ const Movies = () => {
         <div className="MovieList">
             {renderEmpty}
             {renderList}
+            {badRequest}
         </div>
     )
 }

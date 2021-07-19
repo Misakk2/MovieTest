@@ -12,7 +12,9 @@ export const favoriteReducer = (state = initState, action) => {
         case SET_FAVORITE:
             return {
                 ...state,
-                favorite: [...state.favorite, action.payload],
+                favorite: {
+                    favorite: [action.payload]
+                },
                 error: null
             };
         case REMOVE_FAVORITE:
@@ -25,3 +27,4 @@ export const favoriteReducer = (state = initState, action) => {
             return state;
     }
 }
+
