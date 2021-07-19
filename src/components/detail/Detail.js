@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ApiKey, BaseSearchUrl } from '../../api/Api';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetail } from '../../redux/reducers/detailReducer';
+import { setDetail } from '../../redux/detail/detailActions';
 import { Typography } from '@material-ui/core';
 
 export const Detail = () => {
@@ -36,7 +36,7 @@ export const Detail = () => {
     useEffect(() => {
         {
             imdbID && imdbID !== "" &&
-            fetchMovieDetail()
+                fetchMovieDetail()
 
         };
     }, [imdbID])

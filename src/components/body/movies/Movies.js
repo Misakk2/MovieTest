@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
-import axios from 'axios';
 
-import { BaseSearchUrl, ApiKey } from '../../../api/Api';
-import { setMovies } from '../../../redux/reducers/moviesReducer';
-import { setFavorite } from '../../../redux/reducers/favoriteReducer';
-
+import { setFavoriteMovie } from '../../../redux/favorite/favoriteActions';
+import { setMoviesStart } from "../../../redux/movies/moviesActions";
 import { useDispatch, useSelector, connect } from 'react-redux';
 
 
@@ -14,40 +11,21 @@ import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 
 
-export const Movies = () => {
+const Movies = () => {
     const dispatch = useDispatch();
     const getPages = useSelector((state) => state.search.page);
     const getSearch = useSelector((state) => state.search.search);
     const getMovies = useSelector((state) => state.movie.movies);
-
-    const fetchMovies = async () => {
-        const response = await axios.get(`${BaseSearchUrl}?s=${getSearch}&page=${getPages}&apikey=${ApiKey}`)
-            .catch((err) => {
-                console.log("Err", err)
-            });
-        if (response.data.Response === "True") {
-            dispatch(setMovies(response.data.Search))
-        } else {
-            dispatch(setMovies([]));
-            alert(`${getSearch} was not found`)
-        }
-    };
+    console.log(getMovies)
 
     useEffect(() => {
         if (getSearch !== "" && getSearch !== undefined) {
-            fetchMovies();
-        }
-    }, [getPages])
-    useEffect(() => {
-        if (getSearch !== "") {
-            fetchMovies();
+            dispatch(setMoviesStart());
         }
     }, [getSearch])
 
 
-
-    const renderEmpty = getMovies.length == 0 && <p>Start with movie Search</p>;
-
+    const renderEmpty = getMovies.length === 0 && <p>Start with movie Search</p>;
 
     const renderList = getMovies?.map((movie) => {
         const { imdbID: id, Title, Year, Type, Poster } = movie;
@@ -69,7 +47,7 @@ export const Movies = () => {
                         </div>
                     </div>
                 </Link>
-                <Button onClick={(e) => dispatch(setFavorite(movie))} color="primary" className="buttonAdd">
+                <Button onClick={(e) => dispatch(setFavoriteMovie(movie))} color="primary" className="buttonAdd">
                     <StarOutlineIcon /> add to Favorite
                 </Button>
             </div>)
@@ -82,3 +60,6 @@ export const Movies = () => {
         </div>
     )
 }
+
+
+export default Movies;

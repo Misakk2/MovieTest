@@ -1,15 +1,10 @@
-const SET_DETAIL = "SET_DETAIL";
-
-export const setDetail = (detail) => ({
-    type: SET_DETAIL,
-    detail
-})
+export const SET_DETAIL = "SET_DETAIL";
 
 const initState = {
     detail: []
 }
 
-export default (state = initState, action) => {
+const detailReducer = (state = initState, action) => {
     switch (action.type) {
         case SET_DETAIL:
             const { detail } = action
@@ -18,3 +13,5 @@ export default (state = initState, action) => {
             return state;
     }
 }
+
+export default detailReducer;

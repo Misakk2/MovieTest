@@ -4,7 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 import { Input, InputLabel, InputAdornment } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { decrement, increment, setSearch } from '../../../redux/reducers/searchReducer';
+import { decrement, increment, setSearch } from "../../../redux/search/searchActions";
 
 export const Searchbar = () => {
     const [searchState, setSearchState] = useState('');

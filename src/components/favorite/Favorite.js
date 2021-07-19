@@ -3,7 +3,7 @@ import { IconButton } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFavorite } from '../../redux/reducers/favoriteReducer';
+import { removeFavorite } from '../../redux/favorite/favoriteActions';
 
 export const Favorite = () => {
     const dispatch = useDispatch();

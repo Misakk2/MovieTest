@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
 
-import searchReducer from './reducers/searchReducer';
-import moviesReducer from './reducers/moviesReducer';
-import detailReducer from "./reducers/detailReducer";
-import favoriteReducer from "./reducers/favoriteReducer";
+import searchReducer from './search/searchReducer';
+import moviesReducer from './movies/moviesReducer';
+import detailReducer from "./detail/detailReducer";
+import { favoriteReducer } from "./favorite/favoriteReducer";
 
 const persistConfig = {
     key: 'root',
