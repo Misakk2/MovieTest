@@ -16,16 +16,25 @@ const Movies = () => {
     const getPages = useSelector((state) => state.search.page);
     const getSearch = useSelector((state) => state.search.search);
     const getMovies = useSelector((state) => state.movie.movies);
-    console.log(getMovies)
+    const getFavorite = useSelector((state) => state.favorite.favorite)
+    console.log(getFavorite)
 
     useEffect(() => {
         if (getSearch !== "" && getSearch !== undefined) {
-            dispatch(setMoviesStart());
+            dispatch(setMoviesStart({ search: getSearch, page: getPages }));
         }
     }, [getSearch])
 
+    useEffect(() => {
+        if (getSearch !== "" && getSearch !== undefined) {
+            dispatch(setMoviesStart({ search: getSearch, page: getPages }));
+            console.log(getPages)
+        }
+    }, [getPages])
+
 
     const renderEmpty = getMovies.length === 0 && <p>Start with movie Search</p>;
+
 
     const renderList = getMovies?.map((movie) => {
         const { imdbID: id, Title, Year, Type, Poster } = movie;

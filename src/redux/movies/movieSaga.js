@@ -6,9 +6,10 @@ import axios from "axios"
 
 import { setMoviesSuccess, setMoviesFailure } from './moviesActions';
 
-export function* searchForMovies() {
+export function* searchForMovies(getSearch) {
+    console.log(getSearch)
     try {
-        const response = yield axios.get(`${BaseSearchUrl}?s=Batman&page=1&apikey=${ApiKey}`);
+        const response = yield axios.get(`${BaseSearchUrl}?s=${getSearch.payload.search}&page=${getSearch.payload.page}&apikey=${ApiKey}`);
         const { data } = response;
         console.log(data.Search)
         yield put(setMoviesSuccess(data.Search))
