@@ -16,8 +16,7 @@ const Movies = () => {
     const getPages = useSelector((state) => state.search.page);
     const getSearch = useSelector((state) => state.search.search);
     const getMovies = useSelector((state) => state.movie.movies);
-    const getFavorite = useSelector((state) => state.favorite.favorite)
-    console.log(getFavorite)
+    const getFavorite = useSelector((state) => state.favorite.favorite);
 
     useEffect(() => {
         if (getSearch !== "" && getSearch !== undefined) {
@@ -34,10 +33,9 @@ const Movies = () => {
 
     const badRequest = getMovies == undefined && <p>Bad request name try again.</p>;
     const renderEmpty = getMovies?.length === 0 && <p>Start with movie Search</p>;
-
-
     const renderList = getMovies?.map((movie) => {
         const { imdbID: id, Title, Year, Type, Poster } = movie;
+
         return (
             <div key={id} className="MovieListItem">
                 <Link to={`/detail/${id}`} >
@@ -60,6 +58,7 @@ const Movies = () => {
                     <StarOutlineIcon /> add to Favorite
                 </Button>
             </div>)
+
     })
 
     return (
@@ -70,6 +69,5 @@ const Movies = () => {
         </div>
     )
 }
-
 
 export default Movies;
