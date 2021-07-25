@@ -108,3 +108,7 @@ a {
 .MuiBottomNavigationAction-root {
   margin-right: 1rem !important;
 }
+
+.bad__request {
+  text-align: center;
+}

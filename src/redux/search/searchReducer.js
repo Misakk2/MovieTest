@@ -21,10 +21,14 @@ const searchReducer = (state = initStateSearch, action) => {
                 loading: false
             };
         case INCREMENT_PAGE:
-            return { ...state, page: state.page + 1 };
+            return {
+                ...state,
+                page: state.page + 1
+            };
         case DECREMENT_PAGE:
             return {
-                ...state, page: state.page - 1
+                ...state,
+                page: state.page - 1
             };
         default:
             return state

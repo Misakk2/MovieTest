@@ -13,8 +13,7 @@ export const Searchbar = () => {
 
     const handleIncrement = () => {
         {
-            searchState !== "" &&
-                dispatch(increment())
+            dispatch(increment())
         }
     }
 
@@ -34,6 +33,7 @@ export const Searchbar = () => {
         {
             searchState !== "" &&
                 dispatch(setSearch(searchState))
+            setSearchState("")
         }
     }
 

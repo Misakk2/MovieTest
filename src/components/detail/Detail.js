@@ -22,9 +22,6 @@ export const Detail = () => {
         )
     })
 
-
-
-
     const fetchMovieDetail = async () => {
         const response = await axios.get(`${BaseSearchUrl}?i=${imdbID}&apikey=${ApiKey}`)
             .catch(err => {

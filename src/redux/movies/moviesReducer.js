@@ -4,16 +4,23 @@ export const SET_MOVIES_FAILURE = "SET_MOVIES_FAILURE";
 
 const initState = {
     movies: [],
+    moviesLoading: false,
     error: null
 }
 
 const moviesReducer = (state = initState, action) => {
     switch (action.type) {
+        case SET_MOVIES_START:
+            return {
+                ...state,
+                moviesLoading: true
+            }
         case SET_MOVIES_SUCCESS:
             return {
                 ...state,
                 movies: action.payload,
-                error: null
+                error: null,
+                moviesLoading: false
             }
         case SET_MOVIES_FAILURE:
             return {
