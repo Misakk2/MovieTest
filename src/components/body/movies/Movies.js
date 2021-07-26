@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useSnackbar } from 'notistack';
 
 
 const Movies = () => {
@@ -18,6 +19,9 @@ const Movies = () => {
     const getSearch = useSelector((state) => state.search.search);
     const getMovies = useSelector((state) => state.movie.movies);
     const getLoading = useSelector((state) => state.movie.moviesLoading);
+    const { enqueueSnackbar } = useSnackbar();
+
+
 
     useEffect(() => {
         if (getSearch !== "" && getSearch !== undefined) {
@@ -30,11 +34,14 @@ const Movies = () => {
     const renderEmpty = getMovies?.length === 0 && <p>Start with movie Search</p>;
     const renderList = getMovies?.map((movie) => {
         const { imdbID: id, Title, Year, Type, Poster } = movie;
-        const handleAdd = (e) => {
-            e.preventDefault()
 
+        const handleAdd = (variant) => (e) => {
+            e.preventDefault()
+            console.log(variant)
+            enqueueSnackbar(`Movie ${Title} is added to favorite`, { variant });
             dispatch(setFavoriteMovie(movie))
-            alert(`${Title} was add to favorite movies`)
+
+
         }
         return (
             <div key={id} className="MovieListItem">
@@ -54,10 +61,11 @@ const Movies = () => {
                         </div>
                     </div>
                 </Link>
-                <Button onClick={handleAdd} color="primary" className="buttonAdd">
+                <Button onClick={handleAdd('success')} color="primary" className="buttonAdd">
                     <StarOutlineIcon /> add to Favorite
                 </Button>
-            </div>)
+            </div>
+        )
 
     })
 

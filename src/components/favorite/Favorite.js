@@ -6,17 +6,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeFavorite } from '../../redux/favorite/favoriteActions';
 import { Link } from 'react-router-dom';
 
+import { useSnackbar } from 'notistack';
+
 export const Favorite = () => {
     const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
     const getFavorite = useSelector((state) => state.favorite.favorite);
 
     const renderListEmpty = getFavorite?.length === 0 && <p key="NofavoriteMovies">You do not have favorite movies</p>
 
     const renderList = getFavorite?.length > 0 && getFavorite.map((favorit) => {
         const { Title, Year, imdbID, Type, Poster } = favorit;
-        const handleRemove = (e) => {
+        const handleRemove = (variant) => (e) => {
             e.preventDefault()
-
+            enqueueSnackbar(`Movie ${Title} is removed from favorite`, { variant });
             dispatch(removeFavorite(imdbID));
         }
         return (
@@ -37,8 +40,8 @@ export const Favorite = () => {
                         </div>
                     </div>
                 </Link>
-                <Button onClick={handleRemove} color="primary" className="buttonAdd">
-                    <StarIcon /> add to Favorite
+                <Button onClick={handleRemove('warning')} color="primary" className="buttonAdd">
+                    <StarIcon /> Remove from Favorite
                 </Button>
             </div>)
     })
