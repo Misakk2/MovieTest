@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetailStart } from '../../redux/detail/detailActions';
-import { Typography, CircularProgress } from '@material-ui/core';
+import { Typography, CircularProgress, Accordion, AccordionSummary, AccordionDetails } from '@material-ui/core';
 
 export const Detail = () => {
     const { imdbID } = useParams();
+    const [expanded, setExpanded] = useState();
     const dispatch = useDispatch();
     const getImdbID = imdbID;
     const movieDetails = useSelector((state) => state.detail.detail);
@@ -14,9 +15,13 @@ export const Detail = () => {
 
     useEffect(() => {
         dispatch(setDetailStart(getImdbID));
-    }, [getImdbID])
+    }, [getImdbID]);
 
-    const loading = movieDetailsLoading === true && <CircularProgress color="secondary" />
+    const handleChange = (panel) => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
+    };
+
+    const loading = movieDetailsLoading === true && <div className="loadingProgress"><CircularProgress color="secondary" /></div>
     const rateRender = Ratings?.map((rating) => {
         return (
             <div key={rating.Value}>
@@ -30,28 +35,52 @@ export const Detail = () => {
         <div key={imdbID} className="detailContainer">
             <div className="detailPoster"><img key={Poster} src={Poster} alt={Title} /></div>
             <div className="detailText">
-                <Typography component="h2" variant="h2">{Title}</Typography>
-                <li>{Year}</li>
-                <li>{Rated}</li>
-                <li>{Released}</li>
-                <li>{Runtime}</li>
-                <li>{Genre}</li>
-                <li>{Director}</li>
-                <li>{Writer}</li>
-                <li>{Actors}</li>
-                <li>{Plot}</li>
-                <li>{Language}</li>
-                <li >{Country}</li>
-                <li >{Awards}</li>
-                <li >{Metascore}</li>
-                <li >{imdbRating}</li>
-                <li >{imdbVotes}</li>
-                <li >{Type}</li>
-                <li >{DVD}</li>
-                <li >{BoxOffice}</li>
-                <li >{Production}</li>
-                <li >{Website}</li>
-                <li>Rating: {rateRender}</li>
+                <div className="detailTitle">
+                    <Typography component="h2" variant="h2">{Title}</Typography>
+                </div>
+                <div className="detailMain">
+                    <Typography component="p" variant="body1">{Genre}</Typography>
+                    <Typography component="p" variant="body1">{Country} | {Year} | {Runtime}</Typography>
+                    <Typography component="p" variant="body1">{Language} | {Rated}</Typography>
+                </div>
+                <div className="detailCast">
+                    <Typography component="p" variant="body1">Directors: {Director}</Typography>
+                    <Typography component="p" variant="body1">Writers: {Writer}</Typography>
+                    <Typography component="p" variant="body1">Actors: {Actors}</Typography>
+                    <Typography component="p" variant="body1">Production: {Production}</Typography>
+                </div>
+
+                <Accordion square expanded={expanded === 'plot'} onChange={handleChange('plot')}>
+                    <AccordionSummary aria-controls="plot-content" id="plot-header">
+                        <Typography>Plot</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography component="p" variant="body1" >
+                            {Plot}
+                        </Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion square expanded={expanded === 'Ratings'} onChange={handleChange('Ratings')}>
+                    <AccordionSummary aria-controls="Ratings-content" id="Ratings-header">
+                        <Typography>Ratings</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography component="p" variant="body1">Metascore: {Metascore}</Typography>
+                        <Typography component="p" variant="body1">Imdb Rating: {imdbRating}</Typography>
+                        <Typography component="p" variant="body1">Imdb Votes: {imdbVotes}</Typography>
+                        <Typography component="p" variant="body1">Other ratings: {rateRender}</Typography>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion square expanded={expanded === 'Other'} onChange={handleChange('Other')}>
+                    <AccordionSummary aria-controls="Other-content" id="Other-header">
+                        <Typography>Other facts</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Typography component="p" variant="body1">DVD released: {DVD}</Typography>
+                        <Typography component="p" variant="body1">Box Office: {BoxOffice}</Typography>
+                        <Typography component="p" variant="body1">Website: {Website}</Typography>
+                    </AccordionDetails>
+                </Accordion>
             </div>
         </div>
     )

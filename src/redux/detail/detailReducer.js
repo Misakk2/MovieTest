@@ -13,6 +13,7 @@ const detailReducer = (state = initState, action) => {
         case SET_DETAIL_START:
             return {
                 ...state,
+                detail: [],
                 detailLoading: true
             }
         case SET_DETAIL_SUCCESS:

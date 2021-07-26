@@ -13,6 +13,7 @@ const moviesReducer = (state = initState, action) => {
         case SET_MOVIES_START:
             return {
                 ...state,
+                movies: [],
                 moviesLoading: true
             }
         case SET_MOVIES_SUCCESS:

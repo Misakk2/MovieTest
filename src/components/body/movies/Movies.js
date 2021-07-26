@@ -25,7 +25,7 @@ const Movies = () => {
         };
     }, [getSearch, getPages])
 
-    const loading = getLoading === true && <CircularProgress color="secondary" />
+    const loading = getLoading === true && <div className="loadingProgress"><CircularProgress color="secondary" /></div>
     const badRequest = getMovies === undefined && <p className="bad__request">Bad request. <br />{getSearch.toUpperCase()} do not exist.<br /> Please try again.</p>;
     const renderEmpty = getMovies?.length === 0 && <p>Start with movie Search</p>;
     const renderList = getMovies?.map((movie) => {
