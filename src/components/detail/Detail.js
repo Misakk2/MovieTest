@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { ApiKey, BaseSearchUrl } from '../../api/Api';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDetail } from '../../redux/detail/detailActions';
-import { Typography } from '@material-ui/core';
+import { setDetailStart } from '../../redux/detail/detailActions';
+import { Typography, CircularProgress } from '@material-ui/core';
 
 export const Detail = () => {
     const { imdbID } = useParams();
     const dispatch = useDispatch();
+    const getImdbID = imdbID;
     const movieDetails = useSelector((state) => state.detail.detail);
-    console.log(movieDetails)
+    const movieDetailsLoading = useSelector((state) => state.detail.detailLoading);
     const { Title, Year, Rated, Released, Runtime, Genre, Director, Writer, Actors, Plot, Language, Country, Awards, Poster, Ratings, Metascore, imdbRating, imdbVotes, Type, DVD, BoxOffice, Production, Website } = movieDetails;
 
+    useEffect(() => {
+        dispatch(setDetailStart(getImdbID));
+    }, [getImdbID])
+
+    const loading = movieDetailsLoading === true && <CircularProgress color="secondary" />
     const rateRender = Ratings?.map((rating) => {
         return (
             <div key={rating.Value}>
@@ -21,24 +25,8 @@ export const Detail = () => {
             </div>
         )
     })
+    const details = movieDetailsLoading !== true && (
 
-    const fetchMovieDetail = async () => {
-        const response = await axios.get(`${BaseSearchUrl}?i=${imdbID}&apikey=${ApiKey}`)
-            .catch(err => {
-                console.log(err, 'error')
-            });
-        dispatch(setDetail(response.data));
-    }
-
-    useEffect(() => {
-        {
-            imdbID && imdbID !== "" &&
-                fetchMovieDetail()
-
-        };
-    }, [imdbID])
-
-    return (
         <div key={imdbID} className="detailContainer">
             <div className="detailPoster"><img key={Poster} src={Poster} alt={Title} /></div>
             <div className="detailText">
@@ -66,5 +54,14 @@ export const Detail = () => {
                 <li>Rating: {rateRender}</li>
             </div>
         </div>
+    )
+
+
+
+    return (
+        <>
+            {details}
+            {loading}
+        </>
     )
 }

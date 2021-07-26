@@ -1,6 +1,5 @@
 import * as types from './moviesReducer';
 
-
 export const setMoviesStart = (search) => ({
     type: types.SET_MOVIES_START,
     payload: search,

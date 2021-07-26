@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
 import * as types from './moviesReducer';
 import { BaseSearchUrl, ApiKey } from '../../api/Api';
-import axios from "axios"
+import axios from "axios";
 
 
 import { setMoviesSuccess, setMoviesFailure } from './moviesActions';
@@ -11,7 +11,6 @@ export function* searchForMovies(getSearch) {
     try {
         const response = yield axios.get(`${BaseSearchUrl}?s=${getSearch.payload.search}&page=${getSearch.payload.page}&apikey=${ApiKey}`);
         const { data } = response;
-        console.log(data.Search)
         yield put(setMoviesSuccess(data.Search))
     } catch (error) {
         yield put(setMoviesFailure(error))

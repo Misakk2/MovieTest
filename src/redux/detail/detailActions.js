@@ -1,6 +1,16 @@
-import { SET_DETAIL } from './detailReducer';
+import * as types from './detailReducer';
 
-export const setDetail = (detail) => ({
-    type: SET_DETAIL,
-    detail
-})
+export const setDetailStart = (imdbID) => ({
+    type: types.SET_DETAIL_START,
+    paylaod: imdbID
+});
+
+export const setDetailSuccess = (detail) => ({
+    type: types.SET_DETAIL_SUCCESS,
+    payload: detail
+});
+
+export const setDetailFailure = error => ({
+    type: types.SET_DETAIL_FAILURE,
+    payload: error
+});

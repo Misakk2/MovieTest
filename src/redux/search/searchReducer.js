@@ -5,10 +5,6 @@ export const DECREMENT_PAGE = "DECREMENT_PAGE";
 export const initStateSearch = {
     search: '',
     page: 1,
-    movies: [],
-    loading: false,
-    movie: []
-
 }
 
 const searchReducer = (state = initStateSearch, action) => {
@@ -17,8 +13,7 @@ const searchReducer = (state = initStateSearch, action) => {
             return {
                 ...state,
                 search: action.payload,
-                page: 1,
-                loading: false
+                page: 1
             };
         case INCREMENT_PAGE:
             return {

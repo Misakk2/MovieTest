@@ -22,7 +22,6 @@ const Movies = () => {
     useEffect(() => {
         if (getSearch !== "" && getSearch !== undefined) {
             dispatch(setMoviesStart({ search: getSearch, page: getPages }));
-            console.log(setMoviesStart);
         };
     }, [getSearch, getPages])
 
