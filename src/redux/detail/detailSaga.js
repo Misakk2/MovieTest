@@ -6,7 +6,6 @@ import axios from "axios";
 import { setDetailSuccess, setDetailFailure } from "./detailActions";
 
 export function* searchForDetails(getDetail) {
-    console.log(getDetail.paylaod)
     try {
         const resp = yield axios.get(`${BaseSearchUrl}?i=${getDetail.paylaod}&apikey=${ApiKey}`);
         const { data } = resp;

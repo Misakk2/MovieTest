@@ -1,3 +1,5 @@
+import { addMovieToFavorite } from './favoriteUtils'
+
 export const SET_FAVORITE = "SET_FAVORITE";
 
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
@@ -12,7 +14,7 @@ export const favoriteReducer = (state = initState, action) => {
         case SET_FAVORITE:
             return {
                 ...state,
-                favorite: [...state.favorite, action.payload],
+                favorite: addMovieToFavorite(state.favorite, action.payload),
                 error: null
             };
         case REMOVE_FAVORITE:

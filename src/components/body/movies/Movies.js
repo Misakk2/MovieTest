@@ -30,7 +30,12 @@ const Movies = () => {
     const renderEmpty = getMovies?.length === 0 && <p>Start with movie Search</p>;
     const renderList = getMovies?.map((movie) => {
         const { imdbID: id, Title, Year, Type, Poster } = movie;
+        const handleAdd = (e) => {
+            e.preventDefault()
 
+            dispatch(setFavoriteMovie(movie))
+            alert(`${Title} was add to favorite movies`)
+        }
         return (
             <div key={id} className="MovieListItem">
                 <Link to={`/detail/${id}`} >
@@ -49,7 +54,7 @@ const Movies = () => {
                         </div>
                     </div>
                 </Link>
-                <Button onClick={(e) => dispatch(setFavoriteMovie(movie))} color="primary" className="buttonAdd">
+                <Button onClick={handleAdd} color="primary" className="buttonAdd">
                     <StarOutlineIcon /> add to Favorite
                 </Button>
             </div>)
