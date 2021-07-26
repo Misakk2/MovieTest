@@ -83,17 +83,11 @@ a {
   display: flex;
   flex-wrap: wrap;
 }
-.detailPoster {
-  height: 100%;
-  width: 38%;
-}
-.detailPoster img {
-  height: 89.2vh;
-}
 
 .detailText {
   padding: 2rem;
   width: 56%;
+  list-style: none;
 }
 
 .MuiButton-root.buttonAdd {
